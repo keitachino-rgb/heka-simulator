@@ -731,7 +731,7 @@
 
                 if (cardElement) {
                     const profit = result.threeMonthProfit;
-                    cardElement.textContent = formatCurrencyShort(profit);
+                    cardElement.textContent = formatCurrency(profit);
                     cardElement.className = profit >= 0 ? 'card-value' : 'card-value value-warning';
                 }
 
@@ -742,17 +742,6 @@
         }
 
         function formatCurrency(value) {
-            return '¥' + value.toLocaleString();
-        }
-
-        function formatCurrencyShort(value) {
-            if (Math.abs(value) >= 1000000) {
-                const millions = value / 1000000;
-                return '¥' + millions.toFixed(2) + 'M';
-            } else if (Math.abs(value) >= 1000) {
-                const thousands = value / 1000;
-                return '¥' + thousands.toFixed(0) + 'K';
-            }
             return '¥' + value.toLocaleString();
         }
 
