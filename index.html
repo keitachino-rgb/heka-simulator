@@ -410,8 +410,8 @@
             <!-- Tabs -->
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab('overview')">📊 概要</button>
-                <button class="tab-btn" onclick="switchTab('funnel')">🔍 ファネル詳細</button>
-                <button class="tab-btn" onclick="switchTab('notes')">📝 チームノート</button>
+                <button class="tab-btn" onclick="switchTab('funnel')">🔍 詳細分析</button>
+                <button class="tab-btn" onclick="switchTab('notes')">📝 ノート</button>
             </div>
 
             <!-- Overview Tab -->
@@ -454,11 +454,11 @@
             <!-- Funnel Tab -->
             <div id="funnel" class="tab-content">
                 <h2 style="color: #2d5a3d; font-size: 1.8rem; margin-bottom: 30px; font-weight: 700;">
-                    <i class="fas fa-funnel"></i> ファネル詳細分析
+                    <i class="fas fa-funnel"></i> 各段階のコスト・売上
                 </h2>
 
                 <div style="margin-bottom: 40px;">
-                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率10%のシナリオ</h3>
+                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率 10%</h3>
                     <table class="comparison-table">
                         <thead>
                             <tr>
@@ -504,7 +504,7 @@
                 </div>
 
                 <div style="margin-bottom: 40px;">
-                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率20%のシナリオ</h3>
+                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率 20%</h3>
                     <table class="comparison-table">
                         <thead>
                             <tr>
@@ -550,7 +550,7 @@
                 </div>
 
                 <div>
-                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率30%のシナリオ</h3>
+                    <h3 style="color: #2d5a3d; font-weight: 700; margin-bottom: 20px;">転換率 30%</h3>
                     <table class="comparison-table">
                         <thead>
                             <tr>
@@ -731,13 +731,7 @@
 
                 if (cardElement) {
                     const profit = result.threeMonthProfit;
-                    if (profit >= 1000000) {
-                        cardElement.textContent = '¥' + (profit / 1000000).toFixed(2) + 'M';
-                    } else if (profit >= 1000) {
-                        cardElement.textContent = '¥' + (profit / 1000).toFixed(0) + 'K';
-                    } else {
-                        cardElement.textContent = '¥' + profit.toLocaleString();
-                    }
+                    cardElement.textContent = '¥' + profit.toLocaleString();
                     cardElement.className = profit >= 0 ? 'card-value' : 'card-value value-warning';
                 }
 
@@ -748,8 +742,6 @@
         }
 
         function formatCurrency(value) {
-            if (value >= 1000000) return '¥' + (value / 1000000).toFixed(2) + 'M';
-            if (value >= 1000) return '¥' + (value / 1000).toFixed(0) + 'K';
             return '¥' + value.toLocaleString();
         }
 
