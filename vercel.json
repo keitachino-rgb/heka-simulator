@@ -1,0 +1,12 @@
+{
+  "buildCommand": "echo 'Static HTML file - no build needed'",
+  "outputDirectory": ".",
+  "public": true,
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}
