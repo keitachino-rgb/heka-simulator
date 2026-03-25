@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPS CMS - Content Management System</title>
+    <title>SIPS CMS - Content Management System (Demo)</title>
     <style>
         * {
             margin: 0;
@@ -17,117 +17,10 @@
             color: #333;
         }
 
-        .login-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .login-container.active {
-            display: flex;
-        }
-
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .login-box h1 {
-            margin-bottom: 30px;
-            color: #1a3a52;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background: #1a3a52;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background: #0d2337;
-        }
-
-        .btn-logout {
-            background: #ff6b6b;
-        }
-
-        .btn-logout:hover {
-            background: #ff5252;
-        }
-
-        .alert {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        .alert.error {
-            background: #ffe0e0;
-            color: #c00;
-            display: block;
-        }
-
-        .alert.success {
-            background: #e0ffe0;
-            color: #0a0;
-            display: block;
-        }
-
-        /* Main layout */
         .container {
-            display: none;
             height: 100vh;
             display: grid;
             grid-template-columns: 250px 1fr;
-        }
-
-        .container.active {
-            display: grid;
         }
 
         /* Sidebar */
@@ -171,12 +64,6 @@
             color: white;
         }
 
-        .sidebar-footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
         /* Main content */
         .main-content {
             display: flex;
@@ -188,9 +75,6 @@
             background: white;
             padding: 20px;
             border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
@@ -199,18 +83,6 @@
             color: #1a3a52;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .user-info {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Content area */
         .content {
             flex: 1;
             overflow-y: auto;
@@ -230,7 +102,6 @@
             color: #1a3a52;
         }
 
-        /* Article/Page list */
         .items-list {
             background: white;
             border-radius: 10px;
@@ -252,12 +123,18 @@
             color: #333;
         }
 
-        .btn-primary {
-            background: #ff6b6b;
+        .btn {
             padding: 10px 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
         }
 
-        .btn-primary:hover {
+        .btn:hover {
             background: #ff5252;
         }
 
@@ -308,59 +185,28 @@
             color: #c00;
         }
 
-        /* Form */
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 800px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        .demo-badge {
+            background: #ffc107;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
         }
 
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
-            min-height: 300px;
-            resize: vertical;
-        }
-
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ff6b6b;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        .form-actions .btn {
-            flex: 1;
-            padding: 12px;
-        }
-
-        .btn-cancel {
-            background: #999;
-        }
-
-        .btn-cancel:hover {
-            background: #777;
-        }
-
-        /* Empty state */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
             color: #999;
         }
 
-        .empty-state p {
-            margin-bottom: 20px;
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
         @media (max-width: 768px) {
@@ -377,10 +223,6 @@
                 transition: left 0.3s;
             }
 
-            .sidebar.active {
-                left: 0;
-            }
-
             .item {
                 flex-direction: column;
                 align-items: flex-start;
@@ -390,231 +232,58 @@
                 width: 100%;
                 margin-top: 10px;
             }
-
-            .form-container {
-                padding: 20px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Login Panel -->
-    <div class="login-container active" id="loginContainer">
-        <div class="login-box">
-            <h1>SIPS CMS</h1>
-            <div class="alert error" id="loginError"></div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">ユーザー名</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">パスワード</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn">ログイン</button>
-                <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #999;">
-                    デフォルト: admin / admin123
-                </p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Main Container -->
-    <div class="container" id="mainContainer">
+    <div class="container">
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-logo">SIPS CMS</div>
+        <div class="sidebar">
+            <div class="sidebar-logo">SIPS CMS <span class="demo-badge">DEMO</span></div>
             <ul class="sidebar-menu">
                 <li><a class="menu-link active" data-section="articles">ニュース管理</a></li>
                 <li><a class="menu-link" data-section="pages">ページ管理</a></li>
                 <li><a class="menu-link" data-section="services">サービス管理</a></li>
-                <li><a class="menu-link" data-section="settings">設定</a></li>
             </ul>
-            <div class="sidebar-footer">
-                <!-- Logout disabled in demo mode -->
-            </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
             <div class="header">
                 <h1 id="pageTitle">ニュース管理</h1>
-                <div class="header-right">
-                    <div class="user-info" id="userInfo">admin</div>
-                </div>
             </div>
 
             <div class="content">
                 <!-- Articles Section -->
                 <div class="section active" id="articles-section">
-                    <div class="alert error" id="articlesError"></div>
-                    <div class="alert success" id="articlesSuccess"></div>
-
                     <div class="items-list">
                         <div class="item-header">
                             <h3>ニュース一覧</h3>
-                            <button class="btn btn-primary" onclick="showArticleForm()">新規作成</button>
+                            <button class="btn" onclick="alert('デモモードです。編集機能は制限されています。')">新規作成</button>
                         </div>
                         <div id="articlesList"></div>
-                    </div>
-
-                    <!-- Article Form -->
-                    <div id="articleForm" style="display: none; margin-top: 20px;">
-                        <div class="form-container">
-                            <h3>ニュース編集</h3>
-                            <form onsubmit="saveArticle(event)">
-                                <div class="form-group">
-                                    <label for="articleTitle">タイトル</label>
-                                    <input type="text" id="articleTitle" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="articleSlug">スラッグ（URL用）</label>
-                                    <input type="text" id="articleSlug" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="articleExcerpt">抜粋</label>
-                                    <input type="text" id="articleExcerpt">
-                                </div>
-                                <div class="form-group">
-                                    <label for="articleCategory">カテゴリ</label>
-                                    <input type="text" id="articleCategory">
-                                </div>
-                                <div class="form-group">
-                                    <label for="articleContent">コンテンツ</label>
-                                    <textarea id="articleContent" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="articlePublished"> 公開
-                                    </label>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="button" class="btn btn-cancel" onclick="hideArticleForm()">キャンセル</button>
-                                    <button type="submit" class="btn btn-primary">保存</button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Pages Section -->
                 <div class="section" id="pages-section">
-                    <div class="alert error" id="pagesError"></div>
-                    <div class="alert success" id="pagesSuccess"></div>
-
                     <div class="items-list">
                         <div class="item-header">
                             <h3>ページ一覧</h3>
-                            <button class="btn btn-primary" onclick="showPageForm()">新規作成</button>
+                            <button class="btn" onclick="alert('デモモードです。編集機能は制限されています。')">新規作成</button>
                         </div>
                         <div id="pagesList"></div>
-                    </div>
-
-                    <!-- Page Form -->
-                    <div id="pageForm" style="display: none; margin-top: 20px;">
-                        <div class="form-container">
-                            <h3>ページ編集</h3>
-                            <form onsubmit="savePage(event)">
-                                <div class="form-group">
-                                    <label for="pageTitle">タイトル</label>
-                                    <input type="text" id="pageTitle" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pageSlug">スラッグ（URL用）</label>
-                                    <input type="text" id="pageSlug" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pageMetaDescription">メタディスクリプション（SEO用）</label>
-                                    <input type="text" id="pageMetaDescription">
-                                </div>
-                                <div class="form-group">
-                                    <label for="pageContent">コンテンツ</label>
-                                    <textarea id="pageContent" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="pagePublished"> 公開
-                                    </label>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="button" class="btn btn-cancel" onclick="hidePageForm()">キャンセル</button>
-                                    <button type="submit" class="btn btn-primary">保存</button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Services Section -->
                 <div class="section" id="services-section">
-                    <div class="alert error" id="servicesError"></div>
-                    <div class="alert success" id="servicesSuccess"></div>
-
                     <div class="items-list">
                         <div class="item-header">
                             <h3>サービス一覧</h3>
-                            <button class="btn btn-primary" onclick="showServiceForm()">新規作成</button>
+                            <button class="btn" onclick="alert('デモモードです。編集機能は制限されています。')">新規作成</button>
                         </div>
                         <div id="servicesList"></div>
-                    </div>
-
-                    <!-- Service Form -->
-                    <div id="serviceForm" style="display: none; margin-top: 20px;">
-                        <div class="form-container">
-                            <h3>サービス編集</h3>
-                            <form onsubmit="saveService(event)">
-                                <div class="form-group">
-                                    <label for="serviceTitle">タイトル</label>
-                                    <input type="text" id="serviceTitle" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="serviceDescription">説明</label>
-                                    <textarea id="serviceDescription" required style="min-height: 150px;"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="serviceIcon">アイコン番号（01～99）</label>
-                                    <input type="text" id="serviceIcon">
-                                </div>
-                                <div class="form-group">
-                                    <label for="serviceOrder">表示順序</label>
-                                    <input type="number" id="serviceOrder" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <input type="checkbox" id="servicePublished"> 公開
-                                    </label>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="button" class="btn btn-cancel" onclick="hideServiceForm()">キャンセル</button>
-                                    <button type="submit" class="btn btn-primary">保存</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Settings Section -->
-                <div class="section" id="settings-section">
-                    <div class="form-container">
-                        <h3>サイト設定</h3>
-                        <form onsubmit="saveSetting(event)">
-                            <div class="form-group">
-                                <label for="siteTitle">サイトタイトル</label>
-                                <input type="text" id="siteTitle">
-                            </div>
-                            <div class="form-group">
-                                <label for="siteDescription">サイトディスクリプション</label>
-                                <textarea id="siteDescription" style="min-height: 100px;"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactEmail">お問い合わせメールアドレス</label>
-                                <input type="email" id="contactEmail">
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">保存</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -623,38 +292,6 @@
 
     <script>
         const API_BASE = '/api';
-        let token = 'demo-token'; // Demo mode - no authentication required
-        let currentArticleId = null;
-        let currentPageId = null;
-        let currentServiceId = null;
-
-        // Auto-load main panel in demo mode
-        showMainPanel();
-
-        // Login functionality (disabled in demo mode)
-        /*
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            // Demo mode - authentication disabled
-        });
-        */
-
-        function logout() {
-            localStorage.removeItem('token');
-            token = null;
-            showLoginPanel();
-            document.getElementById('loginForm').reset();
-        }
-
-        function showLoginPanel() {
-            document.getElementById('loginContainer').classList.add('active');
-            document.getElementById('mainContainer').classList.remove('active');
-        }
-
-        function showMainPanel() {
-            document.getElementById('loginContainer').classList.remove('active');
-            document.getElementById('mainContainer').classList.add('active');
-            loadArticles();
-        }
 
         // Menu navigation
         document.querySelectorAll('.menu-link').forEach(link => {
@@ -669,26 +306,24 @@
                 const titles = {
                     'articles': 'ニュース管理',
                     'pages': 'ページ管理',
-                    'services': 'サービス管理',
-                    'settings': '設定'
+                    'services': 'サービス管理'
                 };
                 document.getElementById('pageTitle').textContent = titles[section];
 
                 if (section === 'articles') loadArticles();
                 if (section === 'pages') loadPages();
                 if (section === 'services') loadServices();
-                if (section === 'settings') loadSettings();
             });
         });
 
-        // Articles functions
+        // Load articles
         async function loadArticles() {
             try {
                 const response = await fetch(`${API_BASE}/articles?published=false`);
                 const articles = await response.json();
 
                 const list = document.getElementById('articlesList');
-                if (articles.length === 0) {
+                if (!articles || articles.length === 0) {
                     list.innerHTML = '<div class="empty-state"><p>ニュースがありません</p></div>';
                     return;
                 }
@@ -700,109 +335,24 @@
                             <p>${article.category || 'その他'} • ${new Date(article.created_at).toLocaleDateString('ja-JP')} • ${article.published ? '公開' : '下書き'}</p>
                         </div>
                         <div class="item-actions">
-                            <button class="btn-small edit" onclick="editArticle(${article.id})">編集</button>
-                            <button class="btn-small delete" onclick="deleteArticle(${article.id})">削除</button>
+                            <button class="btn-small edit">編集</button>
+                            <button class="btn-small delete">削除</button>
                         </div>
                     </div>
                 `).join('');
             } catch (error) {
-                showError('articlesError', 'ニュースの読み込みに失敗しました');
+                document.getElementById('articlesList').innerHTML = '<div class="empty-state"><p>データ読み込みエラー</p></div>';
             }
         }
 
-        function showArticleForm() {
-            currentArticleId = null;
-            document.getElementById('articleTitle').value = '';
-            document.getElementById('articleSlug').value = '';
-            document.getElementById('articleExcerpt').value = '';
-            document.getElementById('articleCategory').value = '';
-            document.getElementById('articleContent').value = '';
-            document.getElementById('articlePublished').checked = false;
-            document.getElementById('articleForm').style.display = 'block';
-        }
-
-        function hideArticleForm() {
-            document.getElementById('articleForm').style.display = 'none';
-        }
-
-        async function editArticle(id) {
-            try {
-                const response = await fetch(`${API_BASE}/articles/${id}`);
-                const article = await response.json();
-
-                currentArticleId = id;
-                document.getElementById('articleTitle').value = article.title;
-                document.getElementById('articleSlug').value = article.slug;
-                document.getElementById('articleExcerpt').value = article.excerpt || '';
-                document.getElementById('articleCategory').value = article.category || '';
-                document.getElementById('articleContent').value = article.content;
-                document.getElementById('articlePublished').checked = article.published === 1;
-                document.getElementById('articleForm').style.display = 'block';
-            } catch (error) {
-                showError('articlesError', 'ニュースの読み込みに失敗しました');
-            }
-        }
-
-        async function saveArticle(e) {
-            e.preventDefault();
-            const data = {
-                title: document.getElementById('articleTitle').value,
-                slug: document.getElementById('articleSlug').value,
-                excerpt: document.getElementById('articleExcerpt').value,
-                category: document.getElementById('articleCategory').value,
-                content: document.getElementById('articleContent').value,
-                published: document.getElementById('articlePublished').checked
-            };
-
-            try {
-                const method = currentArticleId ? 'PUT' : 'POST';
-                const url = currentArticleId ? `${API_BASE}/articles/${currentArticleId}` : `${API_BASE}/articles`;
-
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (!response.ok) throw new Error('保存に失敗しました');
-
-                showSuccess('articlesSuccess', currentArticleId ? 'ニュースを更新しました' : 'ニュースを作成しました');
-                hideArticleForm();
-                loadArticles();
-            } catch (error) {
-                showError('articlesError', error.message);
-            }
-        }
-
-        async function deleteArticle(id) {
-            if (!confirm('本当に削除しますか？')) return;
-
-            try {
-                const response = await fetch(`${API_BASE}/articles/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (!response.ok) throw new Error('削除に失敗しました');
-
-                showSuccess('articlesSuccess', 'ニュースを削除しました');
-                loadArticles();
-            } catch (error) {
-                showError('articlesError', error.message);
-            }
-        }
-
-        // Pages functions (similar structure)
+        // Load pages
         async function loadPages() {
             try {
                 const response = await fetch(`${API_BASE}/pages`);
                 const pages = await response.json();
 
                 const list = document.getElementById('pagesList');
-                if (pages.length === 0) {
+                if (!pages || pages.length === 0) {
                     list.innerHTML = '<div class="empty-state"><p>ページがありません</p></div>';
                     return;
                 }
@@ -814,106 +364,24 @@
                             <p>${new Date(page.created_at).toLocaleDateString('ja-JP')} • ${page.published ? '公開' : '下書き'}</p>
                         </div>
                         <div class="item-actions">
-                            <button class="btn-small edit" onclick="editPage(${page.id})">編集</button>
-                            <button class="btn-small delete" onclick="deletePage(${page.id})">削除</button>
+                            <button class="btn-small edit">編集</button>
+                            <button class="btn-small delete">削除</button>
                         </div>
                     </div>
                 `).join('');
             } catch (error) {
-                showError('pagesError', 'ページの読み込みに失敗しました');
+                document.getElementById('pagesList').innerHTML = '<div class="empty-state"><p>データ読み込みエラー</p></div>';
             }
         }
 
-        function showPageForm() {
-            currentPageId = null;
-            document.getElementById('pageTitle').value = '';
-            document.getElementById('pageSlug').value = '';
-            document.getElementById('pageMetaDescription').value = '';
-            document.getElementById('pageContent').value = '';
-            document.getElementById('pagePublished').checked = true;
-            document.getElementById('pageForm').style.display = 'block';
-        }
-
-        function hidePageForm() {
-            document.getElementById('pageForm').style.display = 'none';
-        }
-
-        async function editPage(id) {
-            try {
-                const response = await fetch(`${API_BASE}/pages/${id}`);
-                const page = await response.json();
-
-                currentPageId = id;
-                document.getElementById('pageTitle').value = page.title;
-                document.getElementById('pageSlug').value = page.slug;
-                document.getElementById('pageMetaDescription').value = page.meta_description || '';
-                document.getElementById('pageContent').value = page.content;
-                document.getElementById('pagePublished').checked = page.published === 1;
-                document.getElementById('pageForm').style.display = 'block';
-            } catch (error) {
-                showError('pagesError', 'ページの読み込みに失敗しました');
-            }
-        }
-
-        async function savePage(e) {
-            e.preventDefault();
-            const data = {
-                title: document.getElementById('pageTitle').value,
-                slug: document.getElementById('pageSlug').value,
-                meta_description: document.getElementById('pageMetaDescription').value,
-                content: document.getElementById('pageContent').value,
-                published: document.getElementById('pagePublished').checked
-            };
-
-            try {
-                const method = currentPageId ? 'PUT' : 'POST';
-                const url = currentPageId ? `${API_BASE}/pages/${currentPageId}` : `${API_BASE}/pages`;
-
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (!response.ok) throw new Error('保存に失敗しました');
-
-                showSuccess('pagesSuccess', currentPageId ? 'ページを更新しました' : 'ページを作成しました');
-                hidePageForm();
-                loadPages();
-            } catch (error) {
-                showError('pagesError', error.message);
-            }
-        }
-
-        async function deletePage(id) {
-            if (!confirm('本当に削除しますか？')) return;
-
-            try {
-                const response = await fetch(`${API_BASE}/pages/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (!response.ok) throw new Error('削除に失敗しました');
-
-                showSuccess('pagesSuccess', 'ページを削除しました');
-                loadPages();
-            } catch (error) {
-                showError('pagesError', error.message);
-            }
-        }
-
-        // Services functions
+        // Load services
         async function loadServices() {
             try {
                 const response = await fetch(`${API_BASE}/services`);
                 const services = await response.json();
 
                 const list = document.getElementById('servicesList');
-                if (services.length === 0) {
+                if (!services || services.length === 0) {
                     list.innerHTML = '<div class="empty-state"><p>サービスがありません</p></div>';
                     return;
                 }
@@ -925,154 +393,18 @@
                             <p>${service.description.substring(0, 100)}...</p>
                         </div>
                         <div class="item-actions">
-                            <button class="btn-small edit" onclick="editService(${service.id})">編集</button>
-                            <button class="btn-small delete" onclick="deleteService(${service.id})">削除</button>
+                            <button class="btn-small edit">編集</button>
+                            <button class="btn-small delete">削除</button>
                         </div>
                     </div>
                 `).join('');
             } catch (error) {
-                showError('servicesError', 'サービスの読み込みに失敗しました');
+                document.getElementById('servicesList').innerHTML = '<div class="empty-state"><p>データ読み込みエラー</p></div>';
             }
         }
 
-        function showServiceForm() {
-            currentServiceId = null;
-            document.getElementById('serviceTitle').value = '';
-            document.getElementById('serviceDescription').value = '';
-            document.getElementById('serviceIcon').value = '';
-            document.getElementById('serviceOrder').value = '0';
-            document.getElementById('servicePublished').checked = true;
-            document.getElementById('serviceForm').style.display = 'block';
-        }
-
-        function hideServiceForm() {
-            document.getElementById('serviceForm').style.display = 'none';
-        }
-
-        async function editService(id) {
-            try {
-                const response = await fetch(`${API_BASE}/services/${id}`);
-                const service = await response.json();
-
-                currentServiceId = id;
-                document.getElementById('serviceTitle').value = service.title;
-                document.getElementById('serviceDescription').value = service.description;
-                document.getElementById('serviceIcon').value = service.icon || '';
-                document.getElementById('serviceOrder').value = service.order_num || '0';
-                document.getElementById('servicePublished').checked = service.published === 1;
-                document.getElementById('serviceForm').style.display = 'block';
-            } catch (error) {
-                showError('servicesError', 'サービスの読み込みに失敗しました');
-            }
-        }
-
-        async function saveService(e) {
-            e.preventDefault();
-            const data = {
-                title: document.getElementById('serviceTitle').value,
-                description: document.getElementById('serviceDescription').value,
-                icon: document.getElementById('serviceIcon').value,
-                order_num: parseInt(document.getElementById('serviceOrder').value),
-                published: document.getElementById('servicePublished').checked
-            };
-
-            try {
-                const method = currentServiceId ? 'PUT' : 'POST';
-                const url = currentServiceId ? `${API_BASE}/services/${currentServiceId}` : `${API_BASE}/services`;
-
-                const response = await fetch(url, {
-                    method,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (!response.ok) throw new Error('保存に失敗しました');
-
-                showSuccess('servicesSuccess', currentServiceId ? 'サービスを更新しました' : 'サービスを作成しました');
-                hideServiceForm();
-                loadServices();
-            } catch (error) {
-                showError('servicesError', error.message);
-            }
-        }
-
-        async function deleteService(id) {
-            if (!confirm('本当に削除しますか？')) return;
-
-            try {
-                const response = await fetch(`${API_BASE}/services/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                if (!response.ok) throw new Error('削除に失敗しました');
-
-                showSuccess('servicesSuccess', 'サービスを削除しました');
-                loadServices();
-            } catch (error) {
-                showError('servicesError', error.message);
-            }
-        }
-
-        // Settings functions
-        async function loadSettings() {
-            try {
-                const response = await fetch(`${API_BASE}/settings`);
-                const settings = await response.json();
-
-                document.getElementById('siteTitle').value = settings.siteTitle || '';
-                document.getElementById('siteDescription').value = settings.siteDescription || '';
-                document.getElementById('contactEmail').value = settings.contactEmail || '';
-            } catch (error) {
-                console.error('Failed to load settings:', error);
-            }
-        }
-
-        async function saveSetting(e) {
-            e.preventDefault();
-
-            const settings = [
-                { key: 'siteTitle', value: document.getElementById('siteTitle').value },
-                { key: 'siteDescription', value: document.getElementById('siteDescription').value },
-                { key: 'contactEmail', value: document.getElementById('contactEmail').value }
-            ];
-
-            try {
-                for (const setting of settings) {
-                    await fetch(`${API_BASE}/settings`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(setting)
-                    });
-                }
-
-                alert('設定を保存しました');
-            } catch (error) {
-                alert('設定の保存に失敗しました: ' + error.message);
-            }
-        }
-
-        // Utility functions
-        function showError(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.textContent = message;
-            element.style.display = 'block';
-            setTimeout(() => element.style.display = 'none', 5000);
-        }
-
-        function showSuccess(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.className = 'alert success';
-            element.textContent = message;
-            element.style.display = 'block';
-            setTimeout(() => element.style.display = 'none', 3000);
-        }
+        // Auto-load articles on page load
+        loadArticles();
     </script>
 </body>
 </html>
