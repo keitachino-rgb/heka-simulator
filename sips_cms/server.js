@@ -16,12 +16,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Database initialization
-const db = new sqlite3.Database('./cms.db', async (err) => {
+// Database initialization - use memory database in production
+const dbPath = process.env.NODE_ENV === 'production' ? ':memory:' : './cms.db';
+const db = new sqlite3.Database(dbPath, async (err) => {
   if (err) {
     console.error('Database connection error:', err);
   } else {
-    console.log('✓ Connected to SQLite database');
+    console.log(`✓ Connected to ${dbPath === ':memory:' ? 'in-memory' : 'file'} SQLite database`);
     await initializeDatabase();
   }
 });
@@ -102,7 +103,111 @@ function initializeDatabase() {
         VALUES (?, ?, ?)
       `, ['admin', adminPassword, 'admin@sips.local'], function(err) {
         if (err) console.error('Error creating admin user:', err);
-        else console.log('✓ Database initialized with admin user');
+        else console.log('✓ Admin user ready');
+
+        // Insert demo articles
+        const demoArticles = [
+          {
+            title: 'インドでの医療DX展開が決定',
+            slug: 'india-medical-dx-expansion',
+            excerpt: 'Social Impact Solutionsが、インドにおける医療DXプロジェクトの本格始動を発表しました。',
+            category: 'ニュース',
+            content: '当社は、インドの主要医療機関と協力し、医療DXソリューションの導入を進めることになりました。現地のニーズに合わせたカスタマイズを行い、3ヶ月以内の運用開始を目指しています。',
+            published: 1,
+            author_id: 1
+          },
+          {
+            title: 'インドネシア新プロジェクト始動',
+            slug: 'indonesia-new-project-launch',
+            excerpt: 'インドネシアのジャカルタに新しいオフィスを開設し、現地での事業展開を加速させます。',
+            category: 'プレスリリース',
+            content: 'インドネシア市場での医療コンサルティング需要が急速に増加しており、当社は現地での体制強化を決定しました。ジャカルタに現地チームを配置し、医療機関向けのコンサルティングサービスを提供します。',
+            published: 1,
+            author_id: 1
+          },
+          {
+            title: '医療DX人材育成プログラムを開講',
+            slug: 'medical-dx-training-program-launch',
+            excerpt: '医療業界のデジタル化に対応できる人材を育成するための新しいプログラムがスタートします。',
+            category: 'お知らせ',
+            content: '医療機関向けのDX人材育成プログラムを開講いたします。このプログラムは、医療業界の経営層・実務者を対象とした、実践的なデジタル化支援教育です。',
+            published: 1,
+            author_id: 1
+          }
+        ];
+
+        demoArticles.forEach(article => {
+          db.run(`
+            INSERT OR IGNORE INTO articles (title, slug, content, excerpt, category, published, author_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+          `, [article.title, article.slug, article.content, article.excerpt, article.category, article.published, article.author_id]);
+        });
+
+        // Insert demo pages
+        const demoPages = [
+          {
+            title: 'サービス詳細',
+            slug: 'services-detail',
+            content: '当社は医療事業者向けに、包括的なコンサルティングサービスを提供しています。',
+            meta_description: 'Social Impact Solutionsのサービス詳細ページ',
+            published: 1
+          },
+          {
+            title: 'グローバル展開支援',
+            slug: 'global-expansion-support',
+            content: 'インド、インドネシアを中心としたアジア新興国への医療事業展開を支援します。',
+            meta_description: '医療事業のアジア新興国進出支援',
+            published: 1
+          }
+        ];
+
+        demoPages.forEach(page => {
+          db.run(`
+            INSERT OR IGNORE INTO pages (title, slug, content, meta_description, published)
+            VALUES (?, ?, ?, ?, ?)
+          `, [page.title, page.slug, page.content, page.meta_description, page.published]);
+        });
+
+        // Insert demo services
+        const demoServices = [
+          {
+            title: '戦略コンサルティング',
+            description: '医療事業の経営課題を分析し、中長期経営戦略を策定します。市場環境の変化に対応した、実現可能な戦略をご提案します。',
+            icon: '01',
+            order_num: 1,
+            published: 1
+          },
+          {
+            title: '市場分析・調査',
+            description: '国内外の医療市場動向、競合分析、顧客ニーズ調査を実施します。データドリブンな意思決定をサポートし、ビジネスチャンスを発掘します。',
+            icon: '02',
+            order_num: 2,
+            published: 1
+          },
+          {
+            title: '海外進出支援',
+            description: 'インド、インドネシアをはじめとするアジア新興国への医療事業展開をトータルサポートします。現地市場の理解から運用支援まで、一貫対応いたします。',
+            icon: '03',
+            order_num: 3,
+            published: 1
+          },
+          {
+            title: 'デジタル化推進',
+            description: '医療機関のDX推進、システム導入支援、業務プロセス改革を実施します。最新テクノロジーを活用した業務効率化をサポートします。',
+            icon: '04',
+            order_num: 4,
+            published: 1
+          }
+        ];
+
+        demoServices.forEach(service => {
+          db.run(`
+            INSERT OR IGNORE INTO services (title, description, icon, order_num, published)
+            VALUES (?, ?, ?, ?, ?)
+          `, [service.title, service.description, service.icon, service.order_num, service.published]);
+        });
+
+        console.log('✓ Database initialized with demo data');
         resolve();
       });
     });
