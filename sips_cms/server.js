@@ -17,89 +17,95 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Database initialization
-const db = new sqlite3.Database('./cms.db', (err) => {
+const db = new sqlite3.Database('./cms.db', async (err) => {
   if (err) {
     console.error('Database connection error:', err);
   } else {
-    console.log('Connected to SQLite database');
-    initializeDatabase();
+    console.log('✓ Connected to SQLite database');
+    await initializeDatabase();
   }
 });
 
 // Initialize database tables
 function initializeDatabase() {
-  db.serialize(() => {
-    // Users table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
+  return new Promise((resolve) => {
+    db.serialize(() => {
+      // Users table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          username TEXT UNIQUE NOT NULL,
+          password TEXT NOT NULL,
+          email TEXT UNIQUE NOT NULL,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    // News/Articles table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS articles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        slug TEXT UNIQUE NOT NULL,
-        content TEXT NOT NULL,
-        excerpt TEXT,
-        category TEXT,
-        published INTEGER DEFAULT 0,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        author_id INTEGER,
-        FOREIGN KEY(author_id) REFERENCES users(id)
-      )
-    `);
+      // News/Articles table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS articles (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          slug TEXT UNIQUE NOT NULL,
+          content TEXT NOT NULL,
+          excerpt TEXT,
+          category TEXT,
+          published INTEGER DEFAULT 0,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          author_id INTEGER,
+          FOREIGN KEY(author_id) REFERENCES users(id)
+        )
+      `);
 
-    // Pages table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS pages (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        slug TEXT UNIQUE NOT NULL,
-        content TEXT NOT NULL,
-        meta_description TEXT,
-        published INTEGER DEFAULT 1,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
+      // Pages table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS pages (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          slug TEXT UNIQUE NOT NULL,
+          content TEXT NOT NULL,
+          meta_description TEXT,
+          published INTEGER DEFAULT 1,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    // Services table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS services (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        description TEXT NOT NULL,
-        icon TEXT,
-        order_num INTEGER,
-        published INTEGER DEFAULT 1,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
+      // Services table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS services (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          description TEXT NOT NULL,
+          icon TEXT,
+          order_num INTEGER,
+          published INTEGER DEFAULT 1,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    // Settings table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS settings (
-        key TEXT PRIMARY KEY,
-        value TEXT NOT NULL,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
+      // Settings table
+      db.run(`
+        CREATE TABLE IF NOT EXISTS settings (
+          key TEXT PRIMARY KEY,
+          value TEXT NOT NULL,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
 
-    // Create default admin user if not exists
-    const adminPassword = bcrypt.hashSync('admin123', 10);
-    db.run(`
-      INSERT OR IGNORE INTO users (username, password, email)
-      VALUES (?, ?, ?)
-    `, ['admin', adminPassword, 'admin@sips.local']);
+      // Create default admin user if not exists
+      const adminPassword = bcrypt.hashSync('admin123', 10);
+      db.run(`
+        INSERT OR IGNORE INTO users (username, password, email)
+        VALUES (?, ?, ?)
+      `, ['admin', adminPassword, 'admin@sips.local'], function(err) {
+        if (err) console.error('Error creating admin user:', err);
+        else console.log('✓ Database initialized with admin user');
+        resolve();
+      });
+    });
   });
 }
 
