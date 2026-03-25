@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医療事業者向け海外進出支援 | Social Impact Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #1a3a52;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f9fa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1a3a52;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: #ff6b6b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            padding: 20px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .benefit-item h3 {
+            color: #1a3a52;
+            margin-bottom: 10px;
+        }
+
+        /* Regions Section */
+        .regions {
+            background: #f8f9fa;
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .region-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .region-card h3 {
+            color: #1a3a52;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .region-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .region-card li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .region-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* Process Section */
+        .process {
+            background: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .step-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            color: #1a3a52;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a3a52;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section h2 {
+                font-size: 28px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Social Impact Solutions</div>
+            <nav>
+                <a href="#services">サービス</a>
+                <a href="#regions">対応地域</a>
+                <a href="#process">流れ</a>
+                <a href="#contact">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>医療事業の海外展開を全力サポート</h1>
+            <p>インド・インドネシアをはじめとするアジア新興国への進出を、ビジネス戦略から現地ネットワークまで、トータルでサポートします。</p>
+            <button class="cta-button">まずは相談する</button>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>私たちがサポートするサービス</h2>
+            <p class="section-subtitle">市場調査から運用支援まで、ワンストップでの海外進出支援が可能です</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">01</div>
+                    <h3>市場調査・分析</h3>
+                    <p>現地の医療市場動向、規制環境、競合情報などを詳細に調査。進出前の意思決定を強力にサポートします。</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">02</div>
+                    <h3>ビジネス戦略策定</h3>
+                    <p>現地パートナーの選定、販売チャネルの構築、価格戦略など、事業展開に必要な戦略をコンサルティングします。</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">03</div>
+                    <h3>現地ネットワーク構築</h3>
+                    <p>医療機関、流通企業、政府関係機関など、重要なステークホルダーとのネットワーク形成をサポート。</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">04</div>
+                    <h3>規制対応・許認可</h3>
+                    <p>医療機器や医療サービスに関する現地の規制・許認可プロセスを理解し、スムーズな事業展開をサポート。</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">05</div>
+                    <h3>現地化・ローカライズ</h3>
+                    <p>製品・サービスの現地市場への適応化、文化的配慮、言語対応など、現地での成功に向けた調整をサポート。</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">06</div>
+                    <h3>運用支援・成長支援</h3>
+                    <p>事業開始後の人員育成、営業活動支援、オペレーション最適化など、継続的な成長をサポート。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>私たちが選ばれる理由</h2>
+            <p class="section-subtitle">医療事業者からの信頼が実績につながっています</p>
+
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <h3>✓ 医療産業の深い専門知識</h3>
+                    <p>医療業界に特化したコンサルティング実績が豊富。業界特有の課題を理解しています。</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h3>✓ 現地ネットワークの強さ</h3>
+                    <p>インド・インドネシアを含む複数国での実績と、信頼できるローカルパートナーを保有。</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h3>✓ 実行力とスピード</h3>
+                    <p>戦略立案だけでなく、実行サポートまで一貫対応。迅速な市場参入を実現します。</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h3>✓ リスク軽減のノウハウ</h3>
+                    <p>多くの企業の成功・失敗事例から得たリスク管理ノウハウを活用し、進出リスクを最小化。</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h3>✓ 長期的なパートナーシップ</h3>
+                    <p>初期段階から事業成長まで、継続的にサポート。長期的な成功を目指します。</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h3>✓ カスタマイズ対応</h3>
+                    <p>貴社のニーズに合わせたカスタマイズプランをご提案。最適なサポート体制を構築します。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="regions" class="regions">
+        <div class="container">
+            <h2>対応地域</h2>
+            <p class="section-subtitle">主要な進出先国での豊富な実績があります</p>
+
+            <div class="regions-grid">
+                <div class="region-card">
+                    <h3>インド</h3>
+                    <ul>
+                        <li>世界最大級の医療市場</li>
+                        <li>急速に成長する医療DXセクタ</li>
+                        <li>豊富なエンジニア資源</li>
+                        <li>デリー、ムンバイなど主要都市でのネットワーク</li>
+                    </ul>
+                </div>
+
+                <div class="region-card">
+                    <h3>インドネシア</h3>
+                    <ul>
+                        <li>東南アジア最大のポテンシャル</li>
+                        <li>増加する中産階級の医療需要</li>
+                        <li>ジャカルタ、スラバヤでの実績</li>
+                        <li>日系企業との良好な関係</li>
+                    </ul>
+                </div>
+
+                <div class="region-card">
+                    <h3>その他アジア地域</h3>
+                    <ul>
+                        <li>タイ、マレーシア、ベトナム</li>
+                        <li>シンガポール、フィリピン</li>
+                        <li>地域別の最適な戦略立案</li>
+                        <li>柔軟な対応が可能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="process">
+        <div class="container">
+            <h2>進出支援の流れ</h2>
+            <p class="section-subtitle">段階的なアプローチで確実な事業展開をサポート</p>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>初期診断</h3>
+                    <p>貴社の事業内容や進出目的を詳しくヒアリング</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>市場調査</h3>
+                    <p>現地市場の特性と機会を分析</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>戦略立案</h3>
+                    <p>進出戦略とロードマップを策定</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>実行支援</h3>
+                    <p>現地でのパートナー構築と運用開始</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>成長支援</h3>
+                    <p>継続的な最適化と拡大をサポート</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2>海外進出のご相談は今がチャンス</h2>
+            <p>市場変化のスピードが加速しています。<br>今こそが新興国での事業展開の好機です。</p>
+            <button class="cta-button">無料相談を申し込む</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">利用規約</a>
+                <a href="#">お問い合わせ</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Social Impact Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

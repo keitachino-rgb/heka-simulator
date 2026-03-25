@@ -1,0 +1,12 @@
+{
+  "name": "sips-overseas-expansion-lp",
+  "version": "1.0.0",
+  "description": "Social Impact Solutions - 海外進出支援向け LP",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000"
+  },
+  "keywords": ["healthcare", "consulting", "overseas-expansion"],
+  "author": "Social Impact Solutions",
+  "license": "MIT"
+}
