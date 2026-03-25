@@ -432,7 +432,7 @@
                 <li><a class="menu-link" data-section="settings">設定</a></li>
             </ul>
             <div class="sidebar-footer">
-                <button class="btn btn-logout" onclick="logout()">ログアウト</button>
+                <!-- Logout disabled in demo mode -->
             </div>
         </div>
 
@@ -622,48 +622,21 @@
     </div>
 
     <script>
-        const API_BASE = 'http://localhost:5000/api';
-        let token = localStorage.getItem('token');
+        const API_BASE = '/api';
+        let token = 'demo-token'; // Demo mode - no authentication required
         let currentArticleId = null;
         let currentPageId = null;
         let currentServiceId = null;
 
-        // Check authentication on page load
-        if (token) {
-            showMainPanel();
-        } else {
-            showLoginPanel();
-        }
+        // Auto-load main panel in demo mode
+        showMainPanel();
 
-        // Login functionality
+        // Login functionality (disabled in demo mode)
+        /*
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                const response = await fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    showError('loginError', data.error || 'ログイン失敗');
-                    return;
-                }
-
-                token = data.token;
-                localStorage.setItem('token', token);
-                document.getElementById('userInfo').textContent = data.user.username;
-                showMainPanel();
-                loadArticles();
-            } catch (error) {
-                showError('loginError', 'ログイン処理中にエラーが発生しました');
-            }
+            // Demo mode - authentication disabled
         });
+        */
 
         function logout() {
             localStorage.removeItem('token');
